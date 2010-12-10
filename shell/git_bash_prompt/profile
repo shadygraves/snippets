@@ -1,0 +1,16 @@
+function truncate_pwd2 {
+#   How many characters of the $PWD should be kept
+ newPWD="${PWD/#$HOME/~}" 
+ [ ${#newPWD} -gt 25 ] && newPWD=..${newPWD:${#newPWD}-23} 
+}
+PROMPT_COMMAND=truncate_pwd2
+
+PS1='\[\033[01;34m\]\u\[\033[00;34m\]@\[\033[01;34m\]\h \[\033[00;35m\][\[\033[01;34m\]${newPWD}\[\033[00;35m\]]\[\033[00;34m\]\$ \[\033[00m\]'
+
+export CLICOLOR=true
+
+alias cdws='cd ~/Workspace'
+export MAGICK_HOME="/usr/local/ImageMagick"
+PATH=$PATH:~/.bin:$MAGICK_HOME/bin
+export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib"
+
